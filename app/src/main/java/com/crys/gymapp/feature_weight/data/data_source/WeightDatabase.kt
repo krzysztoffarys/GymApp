@@ -1,8 +1,8 @@
-package com.crys.gymapp.feature_weight.data
+package com.crys.gymapp.feature_weight.data.data_source
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.crys.gymapp.feature_weight.domain.Weight
+import com.crys.gymapp.feature_weight.domain.model.Weight
 
 @Database(
     entities = [Weight::class],

@@ -2,7 +2,9 @@ package com.crys.gymapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.crys.gymapp.feature_weight.data.WeightDatabase
+import com.crys.gymapp.feature_weight.data.data_source.WeightDatabase
+import com.crys.gymapp.feature_weight.data.repository.WeightRepositoryImpl
+import com.crys.gymapp.feature_weight.domain.repository.WeightRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +23,10 @@ object AppModule {
             WeightDatabase::class.java,
             WeightDatabase.DATABASE_NAME
         ).build()
+    }
+
+    @Provides
+    fun provideWeightRepository(database: WeightDatabase): WeightRepository {
+        return WeightRepositoryImpl(database.weightDao)
     }
 }
