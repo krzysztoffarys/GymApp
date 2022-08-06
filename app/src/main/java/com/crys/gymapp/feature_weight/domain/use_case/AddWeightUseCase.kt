@@ -9,6 +9,7 @@ class AddWeightUseCase @Inject constructor(
     private val repository: WeightRepository
 ) {
 
+    @Throws(InvalidWeightException::class)
     suspend operator fun invoke(weight: Weight) {
         if (weight.weightInGrams < 0) {
             throw InvalidWeightException("Invalid Weight")

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Gym App</string>
+    <string name="save">Save</string>
+    <string name="your_today_weight">Your weight today was %1$fkg</string>
 </resources>
