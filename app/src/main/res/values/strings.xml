@@ -2,4 +2,7 @@
     <string name="app_name">Gym App</string>
     <string name="save">Save</string>
     <string name="your_today_weight">Your weight today was %1$fkg</string>
+    <string name="validation_value_too_short">Value is too short</string>
+    <string name="validation_value_too_long">Value is too long</string>
+    <string name="validation_value_null_or_empty">This field is required</string>
 </resources>
