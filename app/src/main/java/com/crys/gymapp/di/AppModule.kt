@@ -34,11 +34,4 @@ object AppModule {
     fun provideWeightRepository(database: WeightDatabase): WeightRepository {
         return WeightRepositoryImpl(database.weightDao)
     }
-
-    @WeightValidator
-    @Provides
-    fun provideWeightValidator(): FieldValidator = validationOf(
-        NonNullNonEmptyValidator,
-        MinimumLengthValidator(1)
-    )
 }

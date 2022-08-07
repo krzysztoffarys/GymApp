@@ -7,9 +7,9 @@ import androidx.core.widget.doAfterTextChanged
 import com.crys.gymapp.R
 import com.crys.gymapp.databinding.ActivityWeightBinding
 import com.crys.gymapp.utils.text.DecimalNumberFormattingTextWatcher
-import com.crys.gymapp.utils.handleValidationResult
-import com.crys.gymapp.utils.hide
-import com.crys.gymapp.utils.show
+import com.crys.gymapp.utils.extensions.handleValidationResult
+import com.crys.gymapp.utils.extensions.hide
+import com.crys.gymapp.utils.extensions.show
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

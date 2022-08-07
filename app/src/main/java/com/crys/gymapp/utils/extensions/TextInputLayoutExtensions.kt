@@ -1,7 +1,6 @@
-package com.crys.gymapp.utils
+package com.crys.gymapp.utils.extensions
 
 import android.widget.LinearLayout
-import androidx.annotation.StringRes
 import androidx.core.view.children
 import androidx.core.view.updatePadding
 import com.crys.gymapp.utils.validation.ValidationResult
@@ -12,10 +11,6 @@ fun TextInputLayout.handleValidationResult(result: ValidationResult) {
         is ValidationResult.ValidationFailure -> setErrorText(context.getString(result.failReason.messageRes))
         is ValidationResult.ValidationSuccess -> this.clearError()
     }
-}
-
-fun TextInputLayout.setErrorText(@StringRes textRes: Int?) {
-    setErrorText(textRes?.let(context::getString))
 }
 
 fun TextInputLayout.setErrorText(text: CharSequence?) {

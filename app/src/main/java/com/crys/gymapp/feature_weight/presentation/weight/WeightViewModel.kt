@@ -8,7 +8,7 @@ import com.crys.gymapp.feature_weight.di.WeightValidator
 import com.crys.gymapp.feature_weight.domain.model.Weight
 import com.crys.gymapp.feature_weight.domain.use_case.AddWeightUseCase
 import com.crys.gymapp.feature_weight.domain.use_case.GetWeightUseCase
-import com.crys.gymapp.feature_weight.utils.Consts.GRAMS_IN_KILOGRAM
+import com.crys.gymapp.feature_weight.utils.WeightConsts.GRAMS_IN_KILOGRAM
 import com.crys.gymapp.utils.validation.FieldValidator
 import com.crys.gymapp.utils.validation.ValidationResult
 import dagger.hilt.android.lifecycle.HiltViewModel

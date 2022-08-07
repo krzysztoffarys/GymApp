@@ -6,4 +6,4 @@ sealed class ValidationResult {
 }
 
 internal val ValidationResult?.isSuccess
-        get() = this is ValidationResult.ValidationSuccess
+    get() = this is ValidationResult.ValidationSuccess
