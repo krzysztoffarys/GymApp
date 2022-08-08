@@ -2,6 +2,7 @@ package com.crys.gymapp.feature_weight.presentation.weight
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.PopupMenu
 import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import com.crys.gymapp.R
@@ -55,6 +56,11 @@ class WeightActivity : AppCompatActivity() {
         backImageView.setOnClickListener { finish() }
         weightEditText.addTextChangedListener(decimalNumberFormattingTextWatcher)
         weightEditText.doAfterTextChanged { viewModel.onWeightChange(it.toString()) }
+        binding.menuImageView.setOnClickListener {
+            val menu = PopupMenu(this@WeightActivity, it)
+            menu.inflate(R.menu.menu_weight)
+            menu.show()
+        }
     }
 
     private fun subscribeToObservers() {
