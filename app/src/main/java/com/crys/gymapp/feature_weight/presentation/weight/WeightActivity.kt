@@ -28,24 +28,7 @@ class WeightActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupView()
         subscribeToObservers()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.onResume()
-    }
-
-    private fun onNullWeight() = with(binding) {
-        saveWeightButton.show()
-        weightTextInputLayout.show()
-        weightTextView.hide()
-    }
-
-    private fun onTodayWeight(weight: Double) = with(binding) {
-        saveWeightButton.hide()
-        weightTextInputLayout.hide()
-        weightTextView.show()
-        weightTextView.text = getString(R.string.your_today_weight, weight)
+        viewModel.onCreate()
     }
 
     private fun setupView() = with(binding) {
@@ -60,13 +43,27 @@ class WeightActivity : AppCompatActivity() {
     private fun subscribeToObservers() {
         viewModel.todayWeight.observe(this) { todayWeight ->
             if (todayWeight == null) {
-                onNullWeight()
+                onNotSavedTodayWeight()
             } else {
-                onTodayWeight(todayWeight)
+                onSavedTodayWeight(todayWeight)
             }
         }
         viewModel.weightValidation.observe(this) {
             binding.weightTextInputLayout.handleValidationResult(it)
+            binding.saveWeightButton.handleValidationResult(it)
         }
+    }
+
+    private fun onNotSavedTodayWeight() = with(binding) {
+        saveWeightButton.show()
+        weightTextInputLayout.show()
+        weightTextView.hide()
+    }
+
+    private fun onSavedTodayWeight(weight: Double) = with(binding) {
+        saveWeightButton.hide()
+        weightTextInputLayout.hide()
+        weightTextView.show()
+        weightTextView.text = getString(R.string.your_today_weight, weight)
     }
 }

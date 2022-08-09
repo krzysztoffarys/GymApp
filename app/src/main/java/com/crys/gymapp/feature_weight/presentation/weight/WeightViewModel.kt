@@ -29,7 +29,11 @@ class WeightViewModel @Inject constructor(
     private val _weightValidation = MutableLiveData<ValidationResult>()
     val weightValidation: LiveData<ValidationResult> = _weightValidation
 
-    fun onResume() {
+    fun onCreate() {
+        getTodayWeight()
+    }
+
+    private fun getTodayWeight() {
         viewModelScope.launch {
             _todayWeight.value =
                 getWeightUseCase(dateProvider.getTodayDate())?.weightInGrams?.toDouble()?.div(GRAMS_IN_KILOGRAM)
@@ -44,6 +48,6 @@ class WeightViewModel @Inject constructor(
         viewModelScope.launch {
             addWeightUseCase(Weight((weight * GRAMS_IN_KILOGRAM).toLong(), dateProvider.getTodayDate()))
         }
-        onResume()
+        getTodayWeight()
     }
 }
