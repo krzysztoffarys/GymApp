@@ -5,4 +5,5 @@
     <string name="validation_value_too_short">Value is too short</string>
     <string name="validation_value_too_long">Value is too long</string>
     <string name="validation_value_null_or_empty">This field is required</string>
+    <string name="delete_today_weight">Delete today weight</string>
 </resources>
