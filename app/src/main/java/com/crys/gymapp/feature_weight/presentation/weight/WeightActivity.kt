@@ -36,12 +36,21 @@ class WeightActivity : AppCompatActivity() {
         saveWeightButton.setOnClickListener {
             viewModel.onSendWeightButtonClicked(weight = binding.weightEditText.text.toString().toDouble())
         }
-        backImageView.setOnClickListener { finish() }
+        backImageButton.setOnClickListener { finish() }
         weightEditText.addTextChangedListener(decimalNumberFormattingTextWatcher)
         weightEditText.doAfterTextChanged { viewModel.onWeightChange(it.toString()) }
-        binding.menuImageView.setOnClickListener {
-            val menu = PopupMenu(this@WeightActivity, it)
-            menu.inflate(R.menu.menu_weight)
+        val menu = PopupMenu(this@WeightActivity, binding.menuImageButton)
+        menu.inflate(R.menu.menu_weight)
+        menu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.miDeleteWeight -> {
+                    viewModel.onDeleteTodayItemClicked()
+                }
+                else -> {}
+            }
+            false
+        }
+        binding.menuImageButton.setOnClickListener {
             menu.show()
         }
     }

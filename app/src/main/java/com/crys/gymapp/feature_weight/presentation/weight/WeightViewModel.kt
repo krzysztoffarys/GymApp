@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.crys.gymapp.feature_weight.di.WeightValidator
 import com.crys.gymapp.feature_weight.domain.model.Weight
 import com.crys.gymapp.feature_weight.domain.use_case.AddWeightUseCase
+import com.crys.gymapp.feature_weight.domain.use_case.DeleteWeightUseCase
 import com.crys.gymapp.feature_weight.domain.use_case.GetWeightUseCase
 import com.crys.gymapp.feature_weight.utils.WeightConsts.GRAMS_IN_KILOGRAM
 import com.crys.gymapp.utils.validation.FieldValidator
@@ -19,9 +20,12 @@ import javax.inject.Inject
 class WeightViewModel @Inject constructor(
     private val addWeightUseCase: AddWeightUseCase,
     private val getWeightUseCase: GetWeightUseCase,
+    private val deleteWeightUseCase: DeleteWeightUseCase,
     private val dateProvider: DateProvider,
     @WeightValidator private val weightValidator: FieldValidator
 ) : ViewModel() {
+
+    private var curWeight: Weight? = null
 
     private val _todayWeight = MutableLiveData<Double?>()
     val todayWeight: LiveData<Double?> = _todayWeight
@@ -35,8 +39,8 @@ class WeightViewModel @Inject constructor(
 
     private fun getTodayWeight() {
         viewModelScope.launch {
-            _todayWeight.value =
-                getWeightUseCase(dateProvider.getTodayDate())?.weightInGrams?.toDouble()?.div(GRAMS_IN_KILOGRAM)
+            curWeight = getWeightUseCase(dateProvider.getTodayDate())
+            _todayWeight.value = curWeight?.weightInGrams?.toDouble()?.div(GRAMS_IN_KILOGRAM)
         }
     }
 
@@ -49,5 +53,14 @@ class WeightViewModel @Inject constructor(
             addWeightUseCase(Weight((weight * GRAMS_IN_KILOGRAM).toLong(), dateProvider.getTodayDate()))
         }
         getTodayWeight()
+    }
+
+    fun onDeleteTodayItemClicked() {
+        viewModelScope.launch {
+            curWeight?.let {
+                deleteWeightUseCase(it)
+                getTodayWeight()
+            }
+        }
     }
 }

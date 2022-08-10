@@ -46,4 +46,8 @@
         <item name="colorPrimary">@color/light_green</item>
     </style>
 
+    <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground">@color/dark_green</item>
+    </style>
+
 </resources>
